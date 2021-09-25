@@ -1,0 +1,43 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Cats and Dogs Popularity in US",
+  "width": 800,
+  "height": 600,
+  "data": {
+    "url": "us_states.topojson.txt",
+    "format": {
+          "type": "topojson",
+          "feature": "cb_2018_us_state_500k"
+        }
+  },
+  "transform": [{
+      "lookup": "properties.NAME",
+      "from": {
+        "data": {
+          "url": "catsvdogs3.csv"
+        },
+        "key": "Location",
+        "fields": ["CatPopulation"]
+      }
+    },
+    {"calculate": "datum.CatPopulation + 0.1", "as": "CatPopulation"}
+  ],
+  "projection": {
+    "type": "albersUsa"
+  },
+  "mark": {
+    "type": "geoshape"
+    },
+  "encoding": {
+    "color": {
+      "field": "CatPopulation",
+      "type": "quantitative",
+      "scale": {"type": "log"}
+    },
+    "tooltip": [
+      {"field": "properties.NAME", "type": "nominal", "title": "Location"},
+      {"field": "CatPopulation", "type": "quantitative"}
+    ]
+  }
+
+}
