@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Cats and Dogs Popularity in US",
+  "title": "Cats Popularity in US Households",
   "width": 800,
   "height": 600,
   "data": {
@@ -20,7 +20,7 @@
         "fields": ["CatPopulation"]
       }
     },
-    {"calculate": "datum.CatPopulation + 0.1", "as": "CatPopulation"}
+    {"calculate": "datum.CatPopulation", "as": "Cat Population (Per 1000)"}
   ],
   "projection": {
     "type": "albersUsa"
@@ -30,13 +30,13 @@
     },
   "encoding": {
     "color": {
-      "field": "CatPopulation",
+      "field": "Cat Population (Per 1000)",
       "type": "quantitative",
       "scale": {"type": "log"}
     },
     "tooltip": [
-      {"field": "properties.NAME", "type": "nominal", "title": "Location"},
-      {"field": "CatPopulation", "type": "quantitative"}
+      {"field": "properties.NAME", "type": "nominal", "title": "State"},
+      {"field": "Cat Population (Per 1000)", "type": "quantitative"}
     ]
   }
 
